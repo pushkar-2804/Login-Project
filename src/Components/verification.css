@@ -1,0 +1,16 @@
+.wrap--verification{
+    width: 50%;
+    margin: 10vh auto ;
+    background: rgba(256, 256, 256, 0.5);
+    border: 2px solid red;
+}
+
+.wrap--verificationImage{
+    margin: auto;
+    text-align: center;
+}
+
+.wrap--verification button{
+    margin: auto;
+    /* text-align: center; */
+}

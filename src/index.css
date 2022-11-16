@@ -1,13 +1,104 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+    --color-form:#fff;
+    --color-accent: #FA6B51;
+    /* --color-footer: #2EBF91;
+    --color-text:#f0faf7;
+    --color-textAlt: #f2f2f2;
+; */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+html{
+    font-size: 62.5%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    background-repeat: no-repeat;
+    background-image: url(./images/background.png);
+    background-size: cover;
+    
+    /* width: 100vw; */
+    /* background-color: var(--color-textAlt);
+    color: var(--color-text); */
+    
+
+}
+
+
+h2{
+    font-size: 4rem;
+}
+input{
+    /* margin: 1rem 2rem; */
+    /* padding: 0; */
+    outline: 0;
+    border: 0;
+    padding: 1rem;
+}
+
+select{
+    padding: 1rem;
+    /* margin: 1rem 0; */
+}
+
+.borderInputBox{
+    border: 2px solid #746D6D;
+    border-radius: 3px;
+    margin: 1rem 0;
+}
+
+button{
+    background-color: var(--color-accent);
+    color: var(--color-form);
+    border: 0;
+    padding: 1rem;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+
+/* Grids */
+.grid{
+    display: grid;
+}
+
+.grid--col2{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* Box */
+.wrap--Box{
+
+    /* height: 100vh; */
+    /* width: 100vw; */
+    margin: 0 auto;
+}
+
+.wrap--form{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    height: 80vh;
+    margin: 10vh auto 0 auto;
+}
+
+
+
+/* Form */
+.formHeading{
+    font-weight: 700;
+}
+
+.form{
+    text-align: center;
+    background: var(--color-form);
+    padding: 2rem 8rem;
+    margin: 0 auto;
 }

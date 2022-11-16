@@ -1,0 +1,37 @@
+.wrap--signupBox{
+    height: auto;
+    /* width: 100vw; */
+    margin: auto;
+}
+
+
+.wrap--signupForm{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    margin: 20vh auto 0 auto;
+    /* padding: 2rem; */
+}
+
+.wrap--signupImage{
+    /* background: url(); */
+    background-image: url(../images/ImageBackground.png);
+    padding: 10vh 2rem;
+}
+
+.signupForm{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 1rem 2rem 2rem 2rem;
+    /* grid-template-columns: repeat(2 , 1fr); */
+}
+
+
+.wrap--regnInput{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1rem 2rem;
+}
+

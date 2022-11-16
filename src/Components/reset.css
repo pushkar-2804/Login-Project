@@ -1,0 +1,42 @@
+.wrap--resetInput{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1rem 2rem;
+}
+
+
+.wrap--resetBox{
+    height: auto;
+    /* width: 100vw; */
+    margin: auto;
+}
+
+.wrap--resetForm{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    margin: 10vh auto 0 auto;
+}
+
+.wrap--resetImage{
+    background-image: url(../images/ImageBackground.png);
+    padding: 5vh 2rem 5vh 2rem;
+}
+
+.wrap--resetGroup{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.wrap--resetGroup button{
+    margin: 2rem 0;
+    width: 13rem;
+}
+
+
+.resetForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

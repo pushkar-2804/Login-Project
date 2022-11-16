@@ -1,0 +1,80 @@
+.wrap--loginBox{
+
+    height: 100vh;
+    /* width: 100vw; */
+    margin: auto;
+}
+
+
+
+
+.wrap--loginForm{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    margin: 20vh auto;
+}
+
+/* Image */
+.wrap--loginImage{
+    background-image: url(../images/ImageBackground.png);
+}
+/* Login */
+.loginForm{
+    
+    display: flex;
+    flex-direction: column;
+    /* width: 70%; */
+}
+
+
+/* .loginForm >*{
+
+    border: 2px solid red;
+} */
+
+
+/* Logo */
+.borderInput{
+    /* border: 2px solid #746D6D;
+    border-radius: 3px;
+    margin: 1rem;    */
+    display: flex;
+    background: #D9D9D94A;
+}
+
+/* */
+.borderInput input{
+    outline: 0;
+    border: 0;
+    padding: 1rem;
+    /* width: auto; */
+    /* height: 3rem; */
+}
+
+.borderInput ::placeholder{
+    /* padding: 1rem; */
+    font-weight: 600;
+}
+
+.logo--login{
+    margin: 0.5rem;
+}
+
+.sameLevel{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+/* 
+.boxLevel input{
+    padding-top: 1rem;
+} */
+
+.btn--loginSubmit{
+    width: 50%;
+    margin: 0 auto 2rem auto;
+    border: none;
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.1);
+
+}
