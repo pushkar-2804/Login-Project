@@ -11,27 +11,31 @@
 .wrap--loginForm{
     display: flex;
     flex-direction: row;
-    width: max-content;
+    /* width: 50rem; */
     margin: 20vh auto;
 }
 
 /* Image */
-.wrap--loginImage{
-    background-image: url(../images/ImageBackground.png);
+.loginImage{
+    padding: 10rem 5rem;
 }
+
+.forgotPasswordText{
+    text-align: right;
+}
+
 /* Login */
 .loginForm{
     
     display: flex;
     flex-direction: column;
+    padding: 8rem 14rem;
     /* width: 70%; */
+    text-align: center;
 }
 
 
-/* .loginForm >*{
 
-    border: 2px solid red;
-} */
 
 
 /* Logo */
@@ -73,8 +77,22 @@
 
 .btn--loginSubmit{
     width: 50%;
-    margin: 0 auto 2rem auto;
+    margin: 3rem auto 2rem auto;
     border: none;
     box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.1);
 
 }
+
+
+.marginTop{
+    margin-top: 6rem;
+}
+
+
+#eyeBtn{
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    padding: 0;
+}
+

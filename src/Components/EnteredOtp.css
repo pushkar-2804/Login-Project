@@ -1,0 +1,18 @@
+.otpNumber--Group{
+    display: flex;
+    flex-direction: row;
+    /* max-width: 10rem; */
+}
+.otpNumber--Group >*{
+    width: 5rem;
+    margin: 1rem;
+}
+
+
+.wrap--EnteredOtpImage{
+    padding: 8rem 5rem;
+}
+
+/* .wrap--EnteredOtp{
+   
+} */

@@ -1,0 +1,69 @@
+.wrap--Home{
+    background: url(../images/homeImage.png);
+    height: 100vh;
+
+}
+.homeContent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.navBar{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10vh;
+    color: var(--color-form);
+    font-size: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+}
+/* .navLinks{
+    display: block;
+} */
+.homeHeading{
+    color: var(--color-form);
+    text-align: center;
+    font-size: 5rem;
+    margin-top: 25vh;
+}
+
+/* button */
+#homeButton{
+    margin: auto;
+    background-color: var(--color-altBtn);
+}
+.navClose{
+    display: none;
+}
+
+
+
+@media screen and (max-width:767px) {
+    .navBar{
+        gap:6vh;
+    }
+}
+@media screen and (max-width:630px) {
+    .navBar{
+        gap:2vh;
+    }
+}
+@media screen and (max-width:550px) {
+    .navBar{
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.3);
+        position: fixed;
+        width: 100%;
+    }
+    #logoutUserImage{
+        display: none;
+    }
+    .navClose{
+        display: block;
+    }
+    .invisible{
+        display: none;
+    }
+
+}

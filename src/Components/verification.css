@@ -3,6 +3,8 @@
     margin: 10vh auto ;
     background: rgba(256, 256, 256, 0.5);
     border: 2px solid red;
+    /* font-size: 1rem; */
+    padding: 10vh;
 }
 
 .wrap--verificationImage{
@@ -10,7 +12,16 @@
     text-align: center;
 }
 
-.wrap--verification button{
-    margin: auto;
-    /* text-align: center; */
+
+
+
+.centerHeading{
+    text-align: center;
+    font-size: 3rem;
+}
+#btn--verify{
+    width: auto;
+    padding: 1rem 2rem;
+    /* font-size: 2rem; */
+    margin: 5vh 35rem;
 }

@@ -4,6 +4,8 @@ import Reset from './Components/reset';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import OtpMobile from './Components/OtpMobile';
+import EnteredOtp from './Components/EnteredOtp';
 
 
 
@@ -17,6 +19,9 @@ function App(){
                 <Route path='/reset'  element={<Reset/>}/>
                 <Route path='/home'  element={<Home/>}/>
                 <Route path='/register' element={<SignupForm/>}/>
+                <Route path='/mobileOtp' element={<OtpMobile/>}/>
+                <Route path='/enterOtp' element={<EnteredOtp/>}/>
+                {/* <Route path='/home' element={<Home/>}/> */}
             </Routes>
         </BrowserRouter>
     </>

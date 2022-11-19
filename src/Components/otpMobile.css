@@ -1,0 +1,22 @@
+.wrap--OtpMobile{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid red;
+    margin: 20vh auto 0 auto;
+    width: 10%;
+}
+
+.wrap--OtpMobileImage{
+    background: url(../images/ImageBackground.png);
+    padding: 5rem 10rem;
+}
+
+.wrap--OtpMobileImage img{
+    margin-top: 10vh;
+}
+
+
+.wrap--otpMobile{
+    width: 70%;
+}
+
