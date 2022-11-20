@@ -5,8 +5,8 @@ import userImage from '../images/userImage.svg'
 import keyImage from '../images/keyImage.svg'
 import eyeImage from '../images/eyeImage.svg'
 import axios from 'axios'
-import reCAPTCHA from "react-google-recaptcha"
 import { NavLink } from 'react-router-dom'
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 
@@ -18,14 +18,6 @@ import { NavLink } from 'react-router-dom'
 
 
 
-// const handleSubmit = (e) =>{
-//   e.preventDefault();
-//   const token = captchaRef.current.getValue();
-//   captchaRef.current.reset();
-// }
-
-// const token = captchaRef.current.getValue();
-
 
 const Login = () => {
   const initialLoginValue = {
@@ -34,9 +26,12 @@ const Login = () => {
   };
   const [passwordVisible,setPasswordVisible]= useState(false);
   const [loginValues,setLoginValues] = useState(initialLoginValue);
+  const [verified,setVerified] = useState(false);
 
-
-
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerified(true);
+  }
 
   const eyeBtnHandler = (e)=>{
     e.preventDefault();
@@ -52,12 +47,14 @@ const Login = () => {
     setLoginValues({ ...loginValues, [name]: value.trim() });
     // console.log(loginValues);
   }
+
   
   
   const submitLoginFunction=(e)=>{
     console.log(loginValues);
     e.preventDefault();
-    axios.post('https://curdapibyanirudh.herokuapp.com/Login',
+    if(verified===true){
+    axios.post(`${process.env.REACT_APP_LOGIN}`,
     {email:loginValues.username,
       password:loginValues.password
     }
@@ -67,28 +64,9 @@ const Login = () => {
     console.log(loginValues);
 
   }
+}
 
-  // const [myData,setMyData] = useState([]);
-  // const [isError,setIsError] = useState('');
-
-  // const getApiData = async()=>{
-  //   try {
-  //     const res = await axios.get();
-  //     setMyData(res.data);
-      
-  //   } catch (error) {
-  //     setIsError(error.message);
-  //   }
-  // };
-  // useEffect(()=>{
-  //   getApiData();
-  // },[])
-
-  // {myData.map((post)=>{
-  //   const {gotUsername, gotPassword} = post;
-  //   if(username===)
-  // })}
-  const captchaRef = useRef(null);
+  
 
   return (
     <div className="wrap--Box">
@@ -120,15 +98,20 @@ const Login = () => {
             <NavLink to='/reset' className='forgotPasswordText'>Fogot Password?</NavLink>
               {/* <NavLink to='/ForgotPassword'><span>Forget Password?</span></NavLink> */}
             <div className='sameLevel'>
+            <ReCAPTCHA className='captchaLogin'
+                  sitekey={`${process.env.REACT_APP_SITE_KEY}`}
+                   onChange={onChange}
+                />
+            </div>
+            <div className='sameLevel rememberMe'>
               {/* <span className='boxLevel'><input type='checkBox' />I'm not a robot</span> */}
-              <reCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} ref={captchaRef}/>
               <span className='boxLevel'><input type='checkBox' />Remember Me?</span>
             </div>
             <button type='submit'  className='btn--loginSubmit marginTop'>Sign In</button>
             <div>
               <span>Don't have a account? <NavLink to='/register'>Register</NavLink></span>
             </div>
-            {/* <button>Sign Up</button> */}
+            
         </form>
       </div>
     </div>

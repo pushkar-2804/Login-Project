@@ -1,6 +1,7 @@
 .wrap--loginBox{
 
-    height: 100vh;
+    /* height: 100vh; */
+    /* height: 10vh; */
     /* width: 100vw; */
     margin: auto;
 }
@@ -22,6 +23,8 @@
 
 .forgotPasswordText{
     text-align: right;
+    margin-right: 5rem;
+    /* padding-right: 3rem; */
 }
 
 /* Login */
@@ -29,7 +32,7 @@
     
     display: flex;
     flex-direction: column;
-    padding: 8rem 14rem;
+    padding: 8rem 3rem;
     /* width: 70%; */
     text-align: center;
 }
@@ -45,6 +48,9 @@
     margin: 1rem;    */
     display: flex;
     background: #D9D9D94A;
+    width: 50%;
+    /* justify-content: space-evenly; */
+    margin: 1rem auto;
 }
 
 /* */
@@ -69,6 +75,8 @@
     display: flex;
     justify-content: space-between;
     margin: 2rem;
+    justify-content: center;
+
 }
 /* 
 .boxLevel input{
@@ -83,6 +91,9 @@
 
 }
 
+.rememberMe{
+    margin: 0 auto -3rem auto       ;
+}
 
 .marginTop{
     margin-top: 6rem;
@@ -96,3 +107,10 @@
     padding: 0;
 }
 
+@media screen and (max-width:767px) {
+    .sameLevel{
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem auto 0 auto;
+    }
+}

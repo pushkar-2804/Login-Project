@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 // import {rPhone,rEmail, rName ,rPass} from '../regex'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 // Variable
@@ -26,22 +26,25 @@ const rRollNum = /^[0-9]{5,13}$/;
 
 
 
+
 const SignupForm = ()=>{
-    const initalValues = {'username':'',
-    'email':''
-    ,'mobile':''
-    ,'password':''
-    ,'confirmPassword':''
-    ,'rollNum':''
-    ,'year':'none'
-    ,'branch':'none'
-    ,'gender':''
+    const initalValues = {
+        username:"",
+        email:""
+        ,mobile:""
+        ,password:""
+        ,confirmPassword:""
+        ,rollNum:""
+        ,year:""
+        ,branch:""
+        ,gender:""
+    };
+
+
     
-};
-
-
-const [formValues,setFormValues]=useState(initalValues);
-const [formErrors,setFormErrors]=useState({});
+    
+    const [formValues,setFormValues]=useState(initalValues);
+    const [formErrors,setFormErrors]=useState({});
 const [returnVal,setReturnVal]=useState(true);
 
 
@@ -53,6 +56,10 @@ const handleChange = (e) => {
 };
 
 
+function onChange(value) {
+    console.log("Captcha value:", value);
+    // setverified(true);
+  }
 
 
 let ErrorObj= {};
@@ -154,26 +161,55 @@ let ErrorObj= {};
             
             if(returnVal){
                 
+                const dataCheck={
+                    "fullname": formValues.username,
+                    "rollno":formValues.rollNum.toString(),
+                    // "year": "2",
+                    "year": formValues.year,
+                    "branch": formValues.branch,
+                    "gender": formValues.gender,
+                    "mobno":formValues.mobile.toString(),
+                    "email":formValues.email,
+                    "password": formValues.password,
+                    "password2":formValues.confirmPassword,
+                };
+                console.log(dataCheck);
+                // const data={
+                //     // username: formValues.username,
+                //     email:formValues.email,
+                //     password: formValues.password,
+                //     cpassword:formValues.confirmPassword,
+                //     // rollNo:formValues.rollNum,
+                //     // branch: formValues.branch,
+                //     // year: formValues.year,
+                //     // mobile:formValues.mobile,
+                //     // gender: formValues.gender
+                // };
                 console.log('yay');
-                axios.post('https://curdapibyanirudh.herokuapp.com/register',
-                // axios.post(process.env.REACT_APP_REGISTER,
-                {username: formValues.username,
-                email:formValues.email,
-                password: formValues.password,
-                cPassword:formValues.confirmPassword,
-                rollNo:formValues.rollNum,
-                branch: formValues.branch,
-                year: formValues.year,
-                mobile:formValues.mobile,
-                gender: formValues.gender
-            }
-            )
-            .then(
-                setFormValues(initalValues)
+                // axios.post('https://curdapibyanirudh.herokuapp.com/register',
+                // data 
 
+                // axios.post("https://authentiction-app.herokuapp.com/register",
+                // dataCheck   
+            // )       
+                axios.post(`${process.env.REACT_APP_REGISTER}`,dataCheck)  
+
+            
+            .then((e)=>{
+                // console.log(dataCheck);
+                console.log(e);
+                console.log('success:',e.data.success);
+                // console.log(data);
+                // setFormValues(initalValues)
+                
+            }
+            
             )
             .catch(
-                (error)=> console.log(error)
+                (error)=> {
+                    // console.log(dataCheck);
+                    // console.log(data);
+                    console.log(error)}
                 );
             }
             else{
@@ -214,10 +250,10 @@ let ErrorObj= {};
                         Year
                         <select name="year" className='borderInputBox' id='Year' onChange={handleChange}>
                             <option className='year' value='none'>--Please select--</option>
-                            <option className='year' value='first-year'>First Year</option>
-                            <option className='year' value='second-year'>Second Year</option>
-                            <option className='year' value='third-year'>Third Year</option>
-                            <option className='year' value='fourth-year'>Fourth Year</option>
+                            <option className='year' value='1'>First Year</option>
+                            <option className='year' value='2'>Second Year</option>
+                            <option className='year' value='3'>Third Year</option>
+                            <option className='year' value='4'>Fourth Year</option>
                         </select>
                         <span className='errorText'>{formErrors.yearError}</span>
                     </span>
@@ -268,7 +304,9 @@ let ErrorObj= {};
                     <span className='errorText'>{formErrors.genderError}</span>
                 </span>
                 {/* <span><input type='checkBox' />Remember Me</span> */}
-        
+                <ReCAPTCHA className='captchaSignup'
+                  sitekey={`${process.env.REACT_APP_SITE_KEY}`}
+                   onChange={onChange}/>
                     <button type='submit' className='btn--loginSubmit' >Register</button>
                     {/* <NavLink to='/enterOtp'>
                     </NavLink> */}
