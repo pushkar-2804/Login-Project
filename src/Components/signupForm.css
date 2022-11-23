@@ -45,3 +45,15 @@
 }
 
 
+.bigText{
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width:767px) {
+    .signupForm{
+        padding: 1rem 2.5rem;
+        margin: auto;
+    }
+
+}

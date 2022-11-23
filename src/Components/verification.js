@@ -11,7 +11,7 @@ const Verification = () => {
           <h2 className='centerHeading'>Congratulations <br/>
           You have successfully verified the account</h2>
           {/* <NavLink to='/bla'><button >Back to login page.</button></NavLink> */}
-          <NavLink to='/'><button className='btn--loginSubmit' id='btn--verify'>Login</button></NavLink>
+          <NavLink to='/home'><button className='btn--loginSubmit' id='btn--verify'>Login</button></NavLink>
         </div>
     </div>
   )

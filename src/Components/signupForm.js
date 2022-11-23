@@ -1,6 +1,6 @@
 import './signupForm.css'
 import regnImage from '../images/regnImage.png'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 // import {rPhone,rEmail, rName ,rPass} from '../regex'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -46,7 +46,9 @@ const SignupForm = ()=>{
     const [formValues,setFormValues]=useState(initalValues);
     const [formErrors,setFormErrors]=useState({});
 const [returnVal,setReturnVal]=useState(true);
-
+const [verified,setVerified]=useState(false);
+const [errorSubmit,setErrorSubmit]=useState(false);
+const nav = useNavigate();
 
 const handleChange = (e) => {
         
@@ -58,7 +60,9 @@ const handleChange = (e) => {
 
 function onChange(value) {
     console.log("Captcha value:", value);
-    // setverified(true);
+    setVerified(true);
+    if(value==='null')
+        setVerified(false);
   }
 
 
@@ -85,6 +89,8 @@ let ErrorObj= {};
                 // console.log('username error');
                 setReturnVal(false);   
                 ErrorObj.nameError = "*Enter valid username";
+            setFormErrors(ErrorObj);
+
                 // setFormErrors(ErrorObj);
                 // console.log(formErrors);
                 // console.log('checked');
@@ -96,7 +102,8 @@ let ErrorObj= {};
     
                 setReturnVal(false);   
                 ErrorObj.emailError = "*Enter Valid email";
-    
+            setFormErrors(ErrorObj);
+                
                 // setFormErrors({...formErrors,email:"*Enter Valid email"});
                 // console.log(formErrors);
             }
@@ -107,6 +114,7 @@ let ErrorObj= {};
     
                 setReturnVal(false);   
                 ErrorObj.rollNumError = "*Enter Valid Roll number";
+                setFormErrors(ErrorObj);
     
                 // setFormErrors({...formErrors,rollNum:"*Enter Valid email"});
                 // console.log(formErrors);
@@ -125,6 +133,8 @@ let ErrorObj= {};
                  
                  setReturnVal(false);   
                 ErrorObj.passwordError = "*Must contain 1 uppercase,lowercase, special charcter";
+            setFormErrors(ErrorObj);
+
                 // setFormErrors({...formErrors,password:"*Enter Valid Password"});
                 // console.log(formErrors);
             }
@@ -134,23 +144,42 @@ let ErrorObj= {};
                 ErrorObj.confirmPasswordError = "*Password doesn't match";
                 // setFormErrors({...formErrors,confirmPassword:"*Password doesn't match"});
                 setReturnVal(false);   
+            setFormErrors(ErrorObj);
+
                 // console.log(formErrors);
             }
             
             // Year
-            if(formValues.year=='none'){
+            if(formValues.year==''){
                 setReturnVal(false);
                 ErrorObj.yearError = "*Select a year"
+            setFormErrors(ErrorObj);
+
             }  
                 // console.log('year me error');
                 // console.log('jjgjgjgkg',formValues.year,'chek');
                
                 
                 // Branch
-            if(formValues.branch=='none'){
+            if(formValues.branch==''){
                 setReturnVal(false);
                 ErrorObj.branchError = "*Select a Branch"
+            setFormErrors(ErrorObj);
+
             }
+
+            if(formValues.gender===''){
+                setReturnVal(false);
+                ErrorObj.genderError = "* Select an option"
+                setFormErrors(ErrorObj);
+                setFormErrors(ErrorObj);
+                
+            }
+            
+            
+            if(verified===false)
+                ErrorObj.captchaError = "* Captcha not verified"
+
                 // console.log('branch me error');
             // console.log('jjgjgjgkg',formValues.year,'chek');
             console.log(ErrorObj);
@@ -159,7 +188,7 @@ let ErrorObj= {};
             console.log(returnVal);
             
             
-            if(returnVal){
+            if(returnVal && verified){
                 
                 const dataCheck={
                     "fullname": formValues.username,
@@ -189,16 +218,18 @@ let ErrorObj= {};
                 // axios.post('https://curdapibyanirudh.herokuapp.com/register',
                 // data 
 
-                // axios.post("https://authentiction-app.herokuapp.com/register",
-                // dataCheck   
-            // )       
-                axios.post(`${process.env.REACT_APP_REGISTER}`,dataCheck)  
+                axios.post("https://authentiction-app.herokuapp.com/register",
+                dataCheck   
+            )       
+                // axios.post(`${process.env.REACT_APP_REGISTER}`,dataCheck)  
 
             
             .then((e)=>{
                 // console.log(dataCheck);
                 console.log(e);
                 console.log('success:',e.data.success);
+                if(e.data.success===true)
+                    nav('/enterOtp');
                 // console.log(data);
                 // setFormValues(initalValues)
                 
@@ -208,6 +239,7 @@ let ErrorObj= {};
             .catch(
                 (error)=> {
                     // console.log(dataCheck);
+                    setErrorSubmit(true);
                     // console.log(data);
                     console.log(error)}
                 );
@@ -226,6 +258,7 @@ let ErrorObj= {};
             </div>
             <form className="form signupForm" onSubmit={submitHandler}>
                 <h2 className='formHeading'>Registration</h2>
+                        <span className='errorText bigText'>{errorSubmit?'*Error occured in submitting the form':''}</span>
                 <div className="grid grid--col2 ">
 
 
@@ -249,7 +282,7 @@ let ErrorObj= {};
                     <span className='wrap--regnInput'>
                         Year
                         <select name="year" className='borderInputBox' id='Year' onChange={handleChange}>
-                            <option className='year' value='none'>--Please select--</option>
+                            <option className='year' value=''>--Please select--</option>
                             <option className='year' value='1'>First Year</option>
                             <option className='year' value='2'>Second Year</option>
                             <option className='year' value='3'>Third Year</option>
@@ -263,7 +296,7 @@ let ErrorObj= {};
                     <span className='wrap--regnInput'>
                         Branch
                         <select name="branch" id='Branch' className='borderInputBox' onChange={handleChange}>
-                            <option className='branch' value="none">--Please select--</option>
+                            <option className='branch' value="">--Please select--</option>
                             <option className='branch' value="CSE">CSE</option>
                             <option className='branch' value="CSE-AIML">CSE-AIML</option>
                             <option className='branch' value="CSE-DS">CSE-DS</option>
@@ -307,6 +340,7 @@ let ErrorObj= {};
                 <ReCAPTCHA className='captchaSignup'
                   sitekey={`${process.env.REACT_APP_SITE_KEY}`}
                    onChange={onChange}/>
+                    <span className='errorText'>{formErrors.captchaError}</span>
                     <button type='submit' className='btn--loginSubmit' >Register</button>
                     {/* <NavLink to='/enterOtp'>
                     </NavLink> */}

@@ -19,6 +19,7 @@
 /* Image */
 .loginImage{
     padding: 10rem 5rem;
+    margin: auto;
 }
 
 .forgotPasswordText{
@@ -40,7 +41,6 @@
 
 
 
-
 /* Logo */
 .borderInput{
     /* border: 2px solid #746D6D;
@@ -48,7 +48,7 @@
     margin: 1rem;    */
     display: flex;
     background: #D9D9D94A;
-    width: 50%;
+    width: 60%;
     /* justify-content: space-evenly; */
     margin: 1rem auto;
 }
@@ -58,6 +58,7 @@
     outline: 0;
     border: 0;
     padding: 1rem;
+    width: 100%;
     /* width: auto; */
     /* height: 3rem; */
 }
@@ -112,5 +113,15 @@
         flex-direction: column;
         justify-content: center;
         margin: 2rem auto 0 auto;
+    }
+    .loginImage{
+        padding: 8rem 6rem;
+        /* margin:; */
+    }
+}
+
+@media screen and (max-width:500px) {
+    .loginImage{
+        padding: 5rem;
     }
 }

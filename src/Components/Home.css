@@ -35,6 +35,11 @@
 }
 .navClose{
     display: none;
+    background-color: transparent;
+    color: white;
+    z-index: 50000000000;
+    width: 15%;
+    /* height: 50vh; */
 }
 
 
@@ -52,9 +57,15 @@
 @media screen and (max-width:550px) {
     .navBar{
         flex-direction: column;
-        background-color: rgba(0,0,0,0.3);
+        background-color: rgba(0,0,0);
         position: fixed;
         width: 100%;
+        height: 100vh;
+        justify-content: center;
+        gap: 3rem;
+    }
+    .navBar a{
+        color: var(--color-form);
     }
     #logoutUserImage{
         display: none;

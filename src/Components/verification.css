@@ -4,6 +4,7 @@
     background: rgba(256, 256, 256, 0.5);
     border: 2px solid red;
     /* font-size: 1rem; */
+    text-align: center;
     padding: 10vh;
 }
 
@@ -11,17 +12,57 @@
     margin: auto;
     text-align: center;
 }
-
-
-
+.wrap--verificationImage img{
+    width: 40%;
+    max-width: 20rem;
+}
 
 .centerHeading{
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 #btn--verify{
     width: auto;
     padding: 1rem 2rem;
     /* font-size: 2rem; */
-    margin: 5vh 35rem;
+    /* margin: 5vh 35rem; */
+}
+
+@media screen and (max-width:750px) {
+    .centerHeading{
+        font-size: 2rem;
+    }
+    .wrap--verificationImage img{
+        width: 50%;
+    }
+    
+    .wrap--verification{
+        padding: 8vh;
+        width: 70%;
+    }
+}
+@media screen and (max-width:500px) {
+    .centerHeading{
+        font-size: 2rem;
+    }
+    .wrap--verificationImage img{
+        width: 40%;
+    }
+    .wrap--verification{
+        padding: 5vh;
+    }
+}
+@media screen and (max-width:380px) {
+    .centerHeading{
+        font-size: 1.5rem;
+    }
+    .wrap--verificationImage img{
+        width: 35%;
+    }
+    .wrap--verification button{
+        font-size: 1.2rem;
+    }
+    .wrap--verification{
+        padding: 2vh;
+    }
 }

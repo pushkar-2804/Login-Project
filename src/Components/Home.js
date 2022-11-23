@@ -20,13 +20,14 @@ const Home = () => {
       {/* <div class="wrap--Box"> */}
         <div className="wrap--Home">
           <nav className='navLinks'>
+            {/* <button className='navClose' onClick={hideNav}>-</button> */}
             <button className='navClose' onClick={hideNav}><img src={menuClose} alt='openNav'/></button>
             <div className={navOpen?"navBar":'navBar invisible'}>
               <NavLink to='/home'><span>Home</span></NavLink>
               <NavLink to='/home'><span>Services</span></NavLink>
               <NavLink to='/home'><span>Portfolio</span></NavLink>
               <NavLink to='/home'><span>Contact Us</span></NavLink>
-              <NavLink to='/home'><span>Logout </span></NavLink>
+              <NavLink to='/'><span>Logout </span></NavLink>
               <NavLink to='/home'><img src={userIcon} id='logoutUserImage'/></NavLink>
             </div>
           </nav>

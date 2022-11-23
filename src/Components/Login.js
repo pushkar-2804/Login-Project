@@ -5,9 +5,9 @@ import userImage from '../images/userImage.svg'
 import keyImage from '../images/keyImage.svg'
 import eyeImage from '../images/eyeImage.svg'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import ReCAPTCHA from "react-google-recaptcha";
-
+import Home from './Home'
 
 
 
@@ -27,6 +27,9 @@ const Login = () => {
   const [passwordVisible,setPasswordVisible]= useState(false);
   const [loginValues,setLoginValues] = useState(initialLoginValue);
   const [verified,setVerified] = useState(false);
+  const [invalid,setInvalid] = useState(false);
+  const [empty,setEmpty] = useState(false);
+  const nav = useNavigate();
 
   function onChange(value) {
     console.log("Captcha value:", value);
@@ -43,6 +46,8 @@ const Login = () => {
 
 
   const inputHandler = (e)=>{
+    setEmpty(false);
+    setInvalid(false);
     const { name, value } = e.target;
     setLoginValues({ ...loginValues, [name]: value.trim() });
     // console.log(loginValues);
@@ -53,16 +58,25 @@ const Login = () => {
   const submitLoginFunction=(e)=>{
     console.log(loginValues);
     e.preventDefault();
-    if(verified===true){
+    if(loginValues.username==''|| loginValues.password=='')
+      setEmpty(true);
+    if(verified===true&& empty===false && invalid===false){
     axios.post(`${process.env.REACT_APP_LOGIN}`,
     {email:loginValues.username,
       password:loginValues.password
     }
-    ).then(()=>{console.log('submitted');
-      setLoginValues(initialLoginValue);}
-    ).catch((error)=>console.log(error.message))
+    ).then((e)=>{console.log('submitted');
+      setLoginValues(initialLoginValue);
+      if(e.data==='Matched'){
+      console.log(e.data);
+      nav('/home');
+      }
+      else
+        setInvalid(true);
+    }
+    ).catch((error)=>{console.log(error.message);
+      setInvalid(true);})
     console.log(loginValues);
-
   }
 }
 
@@ -77,6 +91,9 @@ const Login = () => {
         {/* <form className='form loginForm' onSubmit={handleSubmit}> */}
         <form className='form loginForm' onSubmit={submitLoginFunction}>
             <h2 className='formHeading'>Login</h2>
+
+            <p className={invalid?'invalidText':'invisible'}>Invalid Username or Password</p>
+            <p className={empty?'invalidText':'invisible'}>Username or password can't be empty</p>
 
             {/* Username */}
             <span className='borderInput borderInputBox'>
@@ -101,7 +118,7 @@ const Login = () => {
             <ReCAPTCHA className='captchaLogin'
                   sitekey={`${process.env.REACT_APP_SITE_KEY}`}
                    onChange={onChange}
-                />
+            />
             </div>
             <div className='sameLevel rememberMe'>
               {/* <span className='boxLevel'><input type='checkBox' />I'm not a robot</span> */}

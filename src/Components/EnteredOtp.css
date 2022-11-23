@@ -13,6 +13,65 @@
     padding: 8rem 5rem;
 }
 
-/* .wrap--EnteredOtp{
-   
-} */
+.marginLeft{
+    padding-left: 1rem;
+}
+#otpInput{
+    width: 50%;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 3rem;
+
+}
+
+
+@media screen and (max-width:1000px) {
+    /* .formSubHeading{
+        width: 90%;
+    } */
+    .wrap--EnteredOtpImage{
+        padding: 8rem 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    #otpInput{
+        font-size: 2.4rem;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .wrap--EnteredOtp{
+        width: 90%;
+    }
+    #otpInput{
+        font-size: 2rem;
+    }
+    .otpNumber--Group{
+        justify-content: center;
+        width: 100%;
+    }
+    .wrap--Group{
+        text-align: center;
+    }
+    .formHeading{
+        font-size: 3rem;
+    }
+    .formSubHeading{
+        font-size: 1.6rem;
+    }
+}
+        
+@media screen and (max-width:450px) {
+    
+    #otpInput{
+        font-size: 1.3rem;
+    }
+    .wrap--EnteredOtpImage{
+        padding: 4rem 0;
+    }
+    .wrap--EnteredOtpImage img{
+        width: 90%;
+    }
+}
