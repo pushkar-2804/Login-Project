@@ -5,12 +5,24 @@ import { useNavigate , NavLink } from 'react-router-dom'
 // import './verification.css'
 import otpEnterImage from '../images/otpEnterImage.png'
 import './EnteredOtp.css'
+// import { logoutFlag } from './Home'
 
 
 // const otpInputBox = document.getElementById('otpInput');
 const EnteredOtp = () => {
 
-  const otpObject={'otp':'5'};
+  const nav = useNavigate();
+
+  console.log("hey");
+  // Otp Protected routes
+  useEffect(()=>{
+    let otpKey = localStorage.getItem('otpKey');
+    if(!otpKey){
+        nav('/login')
+    }
+},[])
+
+  const otpObject={};
 
   const [otpVal,setOtpVal] = useState(otpObject);
   const [invalid,setInvalid] = useState(false);
@@ -20,24 +32,26 @@ const EnteredOtp = () => {
   const handleOtpValue = (e)=>{
     // console.log(e.target.value);
     // console.log('initial',otpVal);
-    setOtpVal({otp: e.target.value});
+    setOtpVal({"otp": e.target.value.toString()});
     if(e.target.value.length===4)
         e.target.blur();
     // console.log('final',otpVal);
 
   }
   
-  const nav = useNavigate();
 
   
   const verifyOtp = (e)=>{
     e.preventDefault();
     console.log(otpVal);
-    axios.post(`{process.env.REACT_APP_VERIFYOTP}`,otpVal)
+    axios.post(`${process.env.REACT_APP_OTP}`,otpVal)
     .then((e)=>{
       console.log(e);
-      if(e.data===true)
+      if(e.data==="Valid"){
+        localStorage.removeItem('otpKey');
+        localStorage.setItem('verificationKey','active');
         nav('/verification');
+      }
       else
         setInvalid(true);
     })

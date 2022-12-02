@@ -28,6 +28,17 @@ const rRollNum = /^[0-9]{5,13}$/;
 
 
 const SignupForm = ()=>{
+    
+    const nav = useNavigate();
+
+    useEffect(()=>{
+        let registerKey = localStorage.getItem('registerKey');
+        if(!registerKey){
+            nav('/login')
+        }
+    },[])
+
+
     const initalValues = {
         username:"",
         email:""
@@ -48,7 +59,7 @@ const SignupForm = ()=>{
 const [returnVal,setReturnVal]=useState(true);
 const [verified,setVerified]=useState(false);
 const [errorSubmit,setErrorSubmit]=useState(false);
-const nav = useNavigate();
+// const nav = useNavigate();
 
 const handleChange = (e) => {
         
@@ -58,6 +69,13 @@ const handleChange = (e) => {
 };
 
 
+// const nav = useNavigate();
+const delRegisterKeyFunction = ()=>{
+    localStorage.removeItem('registerKey');
+}
+
+
+// Captcha
 function onChange(value) {
     console.log("Captcha value:", value);
     setVerified(true);
@@ -190,11 +208,11 @@ let ErrorObj= {};
             
             if(returnVal && verified){
                 
+                // Akshat api scehma
                 const dataCheck={
                     "fullname": formValues.username,
                     "rollno":formValues.rollNum.toString(),
-                    // "year": "2",
-                    "year": formValues.year,
+                    "year": formValues.year.toString(),
                     "branch": formValues.branch,
                     "gender": formValues.gender,
                     "mobno":formValues.mobile.toString(),
@@ -203,33 +221,43 @@ let ErrorObj= {};
                     "password2":formValues.confirmPassword,
                 };
                 console.log(dataCheck);
+                
+
+
+                // =======================================================================
+                // My backend team
+
                 // const data={
-                //     // username: formValues.username,
+                //     username: formValues.username,
                 //     email:formValues.email,
+                //     rollnum:formValues.rollNum,
                 //     password: formValues.password,
-                //     cpassword:formValues.confirmPassword,
-                //     // rollNo:formValues.rollNum,
-                //     // branch: formValues.branch,
-                //     // year: formValues.year,
-                //     // mobile:formValues.mobile,
-                //     // gender: formValues.gender
+                //     confirmpassword:formValues.confirmPassword,
+                //     phone:formValues.mobile,
+                //     year: formValues.year,
+                //     branch: formValues.branch,
+                //     gen: formValues.gender
                 // };
-                console.log('yay');
+                // console.log('yay');
+                // console.log(data);
                 // axios.post('https://curdapibyanirudh.herokuapp.com/register',
                 // data 
 
-                axios.post("https://authentiction-app.herokuapp.com/register",
-                dataCheck   
-            )       
-                // axios.post(`${process.env.REACT_APP_REGISTER}`,dataCheck)  
+                // axios.post("https://authentiction-app.herokuapp.com/register",
+                // dataCheck   
+            // )       
+                // axios.post(`${process.env.REACT_APP_REGISTER}`,data)  
+                axios.post(`${process.env.REACT_APP_REGISTER}`,dataCheck)  
 
             
             .then((e)=>{
                 // console.log(dataCheck);
                 console.log(e);
-                console.log('success:',e.data.success);
-                if(e.data.success===true)
+                console.log('success:',e.data);
+                if(e.data==="Registered"){
+                    localStorage.setItem('otpKey','active');
                     nav('/enterOtp');
+                }
                 // console.log(data);
                 // setFormValues(initalValues)
                 
@@ -241,7 +269,7 @@ let ErrorObj= {};
                     // console.log(dataCheck);
                     setErrorSubmit(true);
                     // console.log(data);
-                    console.log(error)}
+                    console.log(error)} 
                 );
             }
             else{
@@ -345,7 +373,7 @@ let ErrorObj= {};
                     {/* <NavLink to='/enterOtp'>
                     </NavLink> */}
         
-                      <span>Already have an account?<NavLink to='/'>Sign  in</NavLink></span>
+                      <span>Already have an account?<NavLink to='/' onClick={delRegisterKeyFunction}>Sign  in</NavLink></span>
             </form>
         </div>
     </div>)

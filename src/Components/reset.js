@@ -1,9 +1,25 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState , useEffect } from 'react'
+import { NavLink , useNavigate} from 'react-router-dom'
 import resetImage from '../images/resetImage.png'
 import './reset.css'
 const ForgotPassword = () => {
+
+
+  const nav = useNavigate();
+
+    useEffect(()=>{
+        let resetKey = localStorage.getItem('resetKey');
+        if(!resetKey){
+            nav('/login')
+        }
+    },[])
+
+    // Deleting reset key 
+    const delResetKeyFunction = ()=>{
+      localStorage.removeItem('resetKey');
+  }
+
 
   const initialEmail = {'email':''};
   const [emailForReset,setEmailForReset]= useState(initialEmail);
@@ -13,7 +29,7 @@ const ForgotPassword = () => {
   // Change Input
   const resetPassHandler = (e)=>{
       setEmail(e.target.value);
-      setEmailForReset({'email':email})
+      setEmailForReset({"email":email})
       console.log(email);
   };
   // submit
@@ -21,9 +37,11 @@ const ForgotPassword = () => {
     e.preventDefault();
     // console.log(emailForReset);
     axios.post(`${process.env.REACT_APP_RESET}`,emailForReset)
-    .then()
-    .error();
+    .then((e)=>console.log(e))
+    .catch((error)=>console.log(error));
   };
+
+
 
 
   return (
@@ -46,7 +64,7 @@ const ForgotPassword = () => {
     
                 <div className="wrap--Group">
                   <button type='submit' className='btn--loginSubmit'>Send</button>
-                  <NavLink to='/'>Back to Login</NavLink>
+                  <NavLink to='/' onClick={delResetKeyFunction}>Back to Login</NavLink>
                 </div>
             </form>
         

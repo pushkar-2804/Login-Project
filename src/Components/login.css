@@ -122,6 +122,16 @@
 
 @media screen and (max-width:500px) {
     .loginImage{
-        padding: 5rem;
+        padding: 0;
+        margin: 0 auto;
+        /* width: 70%; */
+    }
+    /* .loginImage img{
+        width: 60%;
+    } */
+    .loginForm{
+        padding: 2rem 0rem;
+        
+         /* width: inherit; */
     }
 }

@@ -1,13 +1,14 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import './login.css'
 import loginImage from '../images/loginImage.png'
 import userImage from '../images/userImage.svg'
 import keyImage from '../images/keyImage.svg'
 import eyeImage from '../images/eyeImage.svg'
 import axios from 'axios'
-import { Navigate, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import ReCAPTCHA from "react-google-recaptcha";
-import Home from './Home'
+// import { logoutFlag } from './Home'
+// import Home from './Home'
 
 
 
@@ -16,14 +17,19 @@ import Home from './Home'
 
 
 
-
+// const rememberMe = document.getElementById('rememberMe');
 
 
 const Login = () => {
+
+  // Remember Me
+  let savedLoginVal = localStorage.getItem('savedLogin');
   const initialLoginValue = {
-    username:'',
-    password:''
+    username:savedLoginVal?savedLoginVal.email:'',
+    password:savedLoginVal?savedLoginVal.password:''
   };
+
+
   const [passwordVisible,setPasswordVisible]= useState(false);
   const [loginValues,setLoginValues] = useState(initialLoginValue);
   const [verified,setVerified] = useState(false);
@@ -31,9 +37,19 @@ const Login = () => {
   const [empty,setEmpty] = useState(false);
   const nav = useNavigate();
 
+
+  useEffect(()=>{
+    let loginKey = localStorage.getItem('loginKey');
+    if(!loginKey){
+        nav('/login')
+    }
+},[]);
+
   function onChange(value) {
-    console.log("Captcha value:", value);
+    // console.log("Captcha value:", value);
     setVerified(true);
+    if(value===null)
+          setVerified(false);
   }
 
   const eyeBtnHandler = (e)=>{
@@ -53,23 +69,42 @@ const Login = () => {
     // console.log(loginValues);
   }
 
+
+  const registerKeyFunction = ()=>{
+    localStorage.setItem('registerKey','active')
+  };
+  const resetKeyFunction = ()=>{
+    localStorage.setItem('resetKey','active')
+  };
   
   
   const submitLoginFunction=(e)=>{
     console.log(loginValues);
     e.preventDefault();
+    
     if(loginValues.username==''|| loginValues.password=='')
       setEmpty(true);
     if(verified===true&& empty===false && invalid===false){
-    axios.post(`${process.env.REACT_APP_LOGIN}`,
-    {email:loginValues.username,
-      password:loginValues.password
-    }
+      // if(empty===false && invalid===false){
+      const loginObj = {email:loginValues.username,
+        password:loginValues.password
+      };
+    axios.post(`${process.env.REACT_APP_LOGIN}`,loginObj
+    
     ).then((e)=>{console.log('submitted');
       setLoginValues(initialLoginValue);
-      if(e.data==='Matched'){
+      if(e.data){
+      localStorage.setItem('loginKey',JSON.stringify(e.data));
+      
+      
+      // remember me
+      // if(remeberMe.checked==true)
+      //         console.log('checking remember me');
+              // localStorage.setItem('savedLogin',JSON.stringify(loginObj));
+
+      // logoutFlag= false;
       console.log(e.data);
-      nav('/home');
+      nav('/');
       }
       else
         setInvalid(true);
@@ -94,25 +129,27 @@ const Login = () => {
 
             <p className={invalid?'invalidText':'invisible'}>Invalid Username or Password</p>
             <p className={empty?'invalidText':'invisible'}>Username or password can't be empty</p>
+            {/* <p className={verified?'invalidText':'invisible'}>Captcha Error</p> */}
 
             {/* Username */}
             <span className='borderInput borderInputBox'>
               <img src={userImage} alt='user' className='logo--login'/>
-              <input type='email' placeholder='Username' name='username' onChange={inputHandler}/>
+              <input type='email' placeholder='Username' name='username' onChange={inputHandler} value={loginValues.username}/>
             </span>
 
 
             {/* Password */}
             <span className='borderInput borderInputBox'>
               <img src={keyImage} alt='password'  className='logo--login'/>
-              <input type={passwordVisible?'text':'password'} placeholder='Password' onChange={inputHandler} name='password'/>
+              <input type={passwordVisible?'text':'password'} placeholder='Password' onChange={inputHandler}
+              value={loginValues.password} name='password'/>
               <button id='eyeBtn' onClick={eyeBtnHandler}><img src={eyeImage} alt='password'  className='logo--login'/></button>
             </span>
 
 
             {/* Forgot Password */}
 
-            <NavLink to='/reset' className='forgotPasswordText'>Fogot Password?</NavLink>
+            <NavLink to='/reset' className='forgotPasswordText' onClick={resetKeyFunction}>Fogot Password?</NavLink>
               {/* <NavLink to='/ForgotPassword'><span>Forget Password?</span></NavLink> */}
             <div className='sameLevel'>
             <ReCAPTCHA className='captchaLogin'
@@ -120,13 +157,13 @@ const Login = () => {
                    onChange={onChange}
             />
             </div>
-            <div className='sameLevel rememberMe'>
-              {/* <span className='boxLevel'><input type='checkBox' />I'm not a robot</span> */}
-              <span className='boxLevel'><input type='checkBox' />Remember Me?</span>
-            </div>
+            {/* <div className='sameLevel rememberMe'>
+              <span className='boxLevel'><input type='checkBox' />I'm not a robot</span>
+              <span className='boxLevel'><input type='checkBox' id='rememberMe' name="rememberMe"/>Remember Me?</span>
+            </div> */}
             <button type='submit'  className='btn--loginSubmit marginTop'>Sign In</button>
             <div>
-              <span>Don't have a account? <NavLink to='/register'>Register</NavLink></span>
+              <span>Don't have a account? <NavLink to='/register' onClick={registerKeyFunction}>Register</NavLink></span>
             </div>
             
         </form>

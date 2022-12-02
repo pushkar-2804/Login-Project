@@ -1,6 +1,7 @@
 .wrap--Home{
     background: url(../images/homeImage.png);
     height: 100vh;
+    width: 100vw;
 
 }
 .homeContent{

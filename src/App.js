@@ -6,6 +6,7 @@ import Login from './Components/Login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import OtpMobile from './Components/OtpMobile';
 import EnteredOtp from './Components/EnteredOtp';
+import ProtectedRoutes from './Components/ProtectedRoutes';
 
 
 
@@ -14,10 +15,12 @@ function App(){
         
         <BrowserRouter>
             <Routes>
-                <Route path='/'  element={<Login/>}/>
+
+                <Route path='/' element={<ProtectedRoutes Component={Home} />}/>
+                <Route path='/login'  element={<Login/>}/>
                 <Route path='/verification'  element={<Verification/>}/>
                 <Route path='/reset'  element={<Reset/>}/>
-                <Route path='/home'  element={<Home/>}/>
+                {/* <Route path='/home'  element={<Home/>}/> */}
                 <Route path='/register' element={<SignupForm/>}/>
                 <Route path='/enterOtp' element={<EnteredOtp/>}/>
                 {/* <Route path='/mobileOtp' element={<OtpMobile/>}/> */}
