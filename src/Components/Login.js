@@ -82,10 +82,11 @@ const Login = () => {
           console.log(e);
           setLoginValues(initialLoginValue);
           axios
-            .post(
-              `https://loginsignup.onrender.com/api/auth/verifyToken`,
-              e.data.accessToken
-            )
+            .get(`https://loginsignup.onrender.com/api/auth/verifyToken`, {
+              headers: {
+                token: `Bearer ${e.data.accessToken}`,
+              },
+            })
             .then((eve) => {
               console.log(eve);
             })

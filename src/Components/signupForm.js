@@ -225,6 +225,7 @@ const SignupForm = () => {
           console.log("success:", e.data);
           if (e.data.message === "Registered") {
             localStorage.setItem("otpKey", "active");
+            localStorage.setItem("email", dataCheck.email);
             nav("/enterOtp");
           }
           // console.log(data);
