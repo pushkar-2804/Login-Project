@@ -193,27 +193,7 @@ const SignupForm = () => {
       };
       console.log(dataCheck);
 
-      // =======================================================================
-      // My backend team
-
-      // const data={
-      //     username: formValues.username,
-      //     email:formValues.email,
-      //     rollnum:formValues.rollNum,
-      //     password: formValues.password,
-      //     confirmpassword:formValues.confirmPassword,
-      //     phone:formValues.mobile,
-      //     year: formValues.year,
-      //     branch: formValues.branch,
-      //     gen: formValues.gender
-      // };
-      // console.log('yay');
-      // console.log(data);
-      // axios.post('https://curdapibyanirudh.herokuapp.com/register',
-      // data
-
-      // axios.post("https://authentiction-app.herokuapp.com/register",
-      // dataCheck
+    //  Removed comments
       // )
       // axios.post(`${process.env.REACT_APP_REGISTER}`,data)
       axios
